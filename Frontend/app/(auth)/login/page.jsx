@@ -36,42 +36,44 @@ export default function LoginPage() {
   };
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ 
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const response = await loginUser(loginData);
+    const response = await loginUser(loginData);
 
-      if (!response.success) {
-        toast.error(response.message);
-        setError("Invalid Credential ! please check Your Email and passWord")
-      }
-
-
-      toast.success("Login SuccessFull")
-      setLoginData({
-        email: "",
-        password: "",
-      });
-       await refreshUser();
-      router.replace("/")
-      router.refresh();
-
-      
-    
-
+    if (!response.success) {
+      toast.error(response.message);
+      setError("Invalid Email or Password");
+      return;
     }
-    catch (err) {
-      setError("Invalid Email or PassWord")
-      toast.error(err.response?.data?.message || "Login failed, Please check your email and password.");
 
-    } finally {
-      setLoading(false);
+    toast.success("Login Successful");
 
-    }
-  };
+    setLoginData({
+      email: "",
+      password: "",
+    });
+
+    await refreshUser();
+
+    router.replace("/");
+    router.refresh();
+
+  } catch (err) {
+    setError("Invalid Email or Password");
+
+    toast.error(
+      err.response?.data?.message || "Login failed"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <main className="min-h-screen w-full flex items-center justify-center px-4 py-10 bg-linear-to-br from-orange-50 via-white to-amber-100 relative overflow-hidden">

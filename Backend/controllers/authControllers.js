@@ -4,32 +4,30 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"
 
 
+   
 const generateToken = (res, payload) => {
-    try {
-        //payload = user._id //mongodb dov id 
-        const token = jwt.sign(
-            payload,
-            process.env.SECRET_KEY,
-            {
-                expiresIn: "3d"
-            }
-        );
+  try {
+    const token = jwt.sign(
+      payload,
+      process.env.SECRET_KEY,
+      { expiresIn: "3d" }
+    );
 
-        res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        maxAge: 3 * 24 * 60 * 60 * 1000,
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
-        // console.log("Cookie set:", token);
-        return token;
+    return token;
+  } catch (error) {
+    console.error("Token generation error:", error);
+    throw error;
+  }
+};
 
-    }
-    catch (err) {
-        return res.status(401).send({ message: err.message, success: false })
-    }
-}
 
 
 // Register Form Logics

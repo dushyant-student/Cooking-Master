@@ -17,35 +17,40 @@ export function AuthProvider({ children }) {
   
  
   // CHECK AUTH USER
-  const refreshUser = useCallback(async () => {
-    try {
-      setWait(true);
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/me`,
-        {
-          credentials: "include",
-          cache: "no-store",
-        }
-      );
+const refreshUser = useCallback(async () => {
+  try {
+    setWait(true);
 
-      const data = await response.json();
-
-      if (response.ok && data?.success) {
-        setUser(data.user);
-      } else {
-        setUser(null);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/me`,
+      {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
       }
+    );
 
-    } catch (error) {
-      console.error("Auth check failed:", error);
+    const data = await response.json();
+
+    console.log("AUTH STATUS:", response.status);
+    console.log("AUTH RESPONSE:", data);
+
+    if (response.ok && data.success && data.user) {
+      setUser(data.user);
+    } else {
       setUser(null);
-
-    } finally {
-      setLoading(false);
-      setWait(false);
     }
-  }, []);
+
+  } catch (error) {
+    console.error("Auth check failed:", error);
+    setUser(null);
+  } finally {
+    setLoading(false);
+    setWait(false);
+  }
+}, []);
+
 
   useEffect(() => {
     refreshUser();
