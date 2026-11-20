@@ -5,7 +5,7 @@ export const getMe = async (req, res) => {
   try {
     const token = req.cookies?.token;
 
-    // User login nahi hai
+    
     if (!token) {
       return res.status(201).json({
         success: false,
