@@ -38,6 +38,10 @@ Users can:
 * JWT-based authentication
 * Protected routes
 * User session management
+* PassWord Management
+* Forget password 
+* Reset Password 
+
 
 ### 🍳 Recipes
 
@@ -595,7 +599,7 @@ This project is licensed under the MIT License.
 
 # 👨‍💻 Author
 
-**Your Name**
+**Dushyant**
 
 Full Stack Developer
 

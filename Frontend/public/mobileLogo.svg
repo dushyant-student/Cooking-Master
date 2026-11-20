@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 560" width="600" height="560">
+  <defs>
+    <!-- Chef Hat Yellow/Orange Gradient -->
+    <linearGradient id="hatGrad" x1="30%" y1="10%" x2="70%" y2="90%">
+      <stop offset="0%" stop-color="#FFE63B" />
+      <stop offset="55%" stop-color="#FFD000" />
+      <stop offset="100%" stop-color="#FFA200" />
+    </linearGradient>
+
+    <!-- Soft Glossy Highlight on Hat -->
+    <radialGradient id="hatHighlight" cx="38%" cy="32%" r="26%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Outer Orange Arch Gradient -->
+    <linearGradient id="archGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF7800" />
+      <stop offset="100%" stop-color="#EA3D00" />
+    </linearGradient>
+
+    <!-- Blue Band Gradient -->
+    <linearGradient id="blueBandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0E9CE0" />
+      <stop offset="50%" stop-color="#0077C2" />
+      <stop offset="100%" stop-color="#0A66B2" />
+    </linearGradient>
+
+    <!-- Outer Flame Gradient -->
+    <linearGradient id="flameOuterGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A00" />
+      <stop offset="100%" stop-color="#E63900" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Emblem Group -->
+  <g id="logo-emblem">
+    <!-- Outer Orange Arch -->
+    <path d="M 212 224 A 96 105 0 1 1 388 224" fill="none" stroke="url(#archGrad)" stroke-width="11" stroke-linecap="round" />
+
+    <!-- Chef Hat Puffy Cloud Top -->
+    <path d="M 244 202 
+             C 202 198, 194 140, 232 124 
+             C 234 86, 282 74, 300 98 
+             C 318 74, 366 86, 368 124 
+             C 406 140, 398 198, 356 202 
+             Q 300 194 244 202 Z" fill="url(#hatGrad)" stroke="#F59B00" stroke-width="3.5" stroke-linejoin="round" />
+
+    <!-- Glossy Shine Overlay -->
+    <path d="M 244 202 
+             C 202 198, 194 140, 232 124 
+             C 234 86, 282 74, 300 98 
+             C 318 74, 366 86, 368 124 
+             C 406 140, 398 198, 356 202 
+             Q 300 194 244 202 Z" fill="url(#hatHighlight)" />
+
+    <!-- Hat White Band -->
+    <path d="M 244 202 Q 300 194 356 202 L 352 226 Q 300 218 248 226 Z" fill="#FFFFFF" stroke="#D2DCE6" stroke-width="1.5" stroke-linejoin="round" />
+
+    <!-- Hat Blue Bottom Trim -->
+    <path d="M 248 226 Q 300 218 352 226 L 350 238 Q 300 230 250 238 Z" fill="url(#blueBandGrad)" />
+
+    <!-- Flame Icon Below Hat -->
+    <g id="flame" transform="translate(300, 272)">
+      <!-- Outer Orange/Red Flame -->
+      <path d="M 0 -26 
+               C 5 -16, 17 -8, 17 6 
+               C 17 17, 9 24, 0 24 
+               C -9 24, -17 17, -17 6 
+               C -17 -3, -11 -10, -8 -14 
+               C -9 -8, -6 -5, -4 -6 
+               C -4 -14, -2 -20, 0 -26 Z" fill="url(#flameOuterGrad)" />
+      <!-- Inner Yellow Flame Core -->
+      <path d="M 0 -4 
+               C 4 2, 8 6, 8 12 
+               C 8 17, 4 20, 0 20 
+               C -4 20, -8 17, -8 12 
+               C -8 6, -4 2, 0 -4 Z" fill="#FFD400" />
+    </g>
+  </g>
+
+  <!-- Brand Typography -->
+  <g id="brand-text" fill="#134574" text-anchor="middle" font-family="&#39;Nunito&#39;, &#39;Quicksand&#39;, &#39;Varela Round&#39;, &#39;Arial Rounded MT Bold&#39;, &#39;Segoe UI&#39;, sans-serif" font-weight="900">
+    <text x="300" y="388" font-size="88" letter-spacing="-1">Cooking</text>
+    <text x="300" y="476" font-size="88" letter-spacing="-1">Master</text>
+  </g>
+</svg>

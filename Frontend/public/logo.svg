@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <defs>
+    <!-- Chef Hat Yellow/Gold Gradient -->
+    <linearGradient id="hatYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF566" />
+      <stop offset="55%" stop-color="#FFD400" />
+      <stop offset="100%" stop-color="#FFA800" />
+    </linearGradient>
+
+    <!-- Chef Hat Glossy White Highlight -->
+    <radialGradient id="hatHighlight" cx="40%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="70%" stop-color="#FFF9B0" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#FFD400" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Vibrant Orange Gradient -->
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C00" />
+      <stop offset="50%" stop-color="#FF5E00" />
+      <stop offset="100%" stop-color="#E63900" />
+    </linearGradient>
+
+    <!-- Vibrant Blue Gradient -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29B6F6" />
+      <stop offset="50%" stop-color="#0288D1" />
+      <stop offset="100%" stop-color="#01579B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Culinary Emblem: Chef Hat + Flame/Swirl Accent -->
+  <g transform="translate(95, 102)">
+    <!-- Subtle Dynamic Swoosh Ring Behind Hat -->
+    <path d="M -52,25 A 58,58 0 1,1 52,25" fill="none" stroke="url(#orangeGrad)" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Bright Yellow Chef Hat -->
+    <g transform="translate(0, 4) scale(0.75)">
+      <path d="M -52,14 
+               C -76,12 -84,-20 -58,-34 
+               C -54,-66 -12,-76 0,-54 
+               C 12,-76 54,-66 58,-34 
+               C 84,-20 76,12 52,14 Z" fill="url(#hatYellow)" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round" />
+      <ellipse cx="-8" cy="-26" rx="34" ry="24" fill="url(#hatHighlight)" />
+      <path d="M -46,16 Q 0,8 46,16 L 44,31 Q 0,23 -44,31 Z" fill="#FFFFFF" stroke="#DCE6EE" stroke-width="1.5" />
+      <path d="M -44,31 Q 0,23 44,31 L 43,39 Q 0,31 -43,39 Z" fill="url(#blueGrad)" />
+    </g>
+
+    <!-- Center Flame Accent Below Hat -->
+    <g transform="translate(0, 48)">
+      <path d="M 0,-12 
+               C 5,-6 10,-2 10,4 
+               C 10,10 5.5,14 0,14 
+               C -5.5,14 -10,10 -10,4 
+               C -10,1 -7.5,-2 -5.5,-4 
+               C -5.5,-1 -4,1 -2,1 
+               C -3,-3 -2,-8 0,-12 Z" fill="url(#orangeGrad)" />
+      <path d="M 0,2 C 2,4 3.5,6 3.5,8 C 3.5,10 2,11.5 0,11.5 C -2,11.5 -3.5,10 -3.5,8 C -3.5,6 -2,4 0,2 Z" fill="#FFD400" />
+    </g>
+  </g>
+
+  <!-- Right Long Wordmark: COOKING MASTER (Single Line, No Monogram, No Border) -->
+  <g transform="translate(185, 0)">
+    <!-- "COOKING" in Vibrant Orange -->
+    <text x="0" y="102" font-family="&#39;Montserrat&#39;, &#39;Segoe UI&#39;, Roboto, Helvetica, Arial, sans-serif" font-size="50" font-weight="900" letter-spacing="2" fill="url(#orangeGrad)">
+      COOKING
+    </text>
+
+    <!-- "MASTER" in Deep Navy & Bright Blue -->
+    <text x="292" y="102" font-family="&#39;Montserrat&#39;, &#39;Segoe UI&#39;, Roboto, Helvetica, Arial, sans-serif" font-size="50" font-weight="900" letter-spacing="2" fill="#0D2B45">
+      MASTER
+    </text>
+
+    <!-- Sleek Horizontal Underline Accent with Star & Flame -->
+    <g transform="translate(0, 128)">
+      <!-- Left Orange Accent Bar -->
+      <rect x="2" y="-2" width="245" height="4" rx="2" fill="url(#orangeGrad)" />
+      
+      <!-- Five-Point Star -->
+      <polygon points="265,-6 267,-1.5 272,-1.5 268,1.5 269.5,6 265,3.2 260.5,6 262,1.5 258,-1.5 263,-1.5" fill="#FFD400" stroke="#F59E0B" stroke-width="0.8" />
+
+      <!-- Right Blue Accent Bar -->
+      <rect x="283" y="-2" width="265" height="4" rx="2" fill="url(#blueGrad)" />
+    </g>
+  </g>
+</svg>

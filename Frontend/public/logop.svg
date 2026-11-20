@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <!-- Chef Hat Yellow/Gold Gradient -->
+    <linearGradient id="hatYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF566" />
+      <stop offset="55%" stop-color="#FFD400" />
+      <stop offset="100%" stop-color="#FFA800" />
+    </linearGradient>
+
+    <!-- Chef Hat Glossy White Highlight -->
+    <radialGradient id="hatHighlight" cx="40%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="70%" stop-color="#FFF9B0" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#FFD400" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Vibrant Orange Gradient for 'C' -->
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C00" />
+      <stop offset="50%" stop-color="#FF5E00" />
+      <stop offset="100%" stop-color="#E63900" />
+    </linearGradient>
+
+    <!-- Vibrant Blue Gradient for 'M' -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29B6F6" />
+      <stop offset="50%" stop-color="#0288D1" />
+      <stop offset="100%" stop-color="#01579B" />
+    </linearGradient>
+
+    <!-- Soft Subtle Outer Shadow -->
+    <filter id="softShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F2942" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Crisp White Rectangular Badge (Width 550, Height 350 - Horizontal Rectangle) -->
+  <rect x="25" y="25" width="550" height="350" rx="30" fill="#FFFFFF" stroke="#E1E8ED" stroke-width="5" filter="url(#softShadow)" />
+  <rect x="37" y="37" width="526" height="326" rx="22" fill="none" stroke="#EBF1F5" stroke-width="2.5" />
+
+  <!-- Bright Yellow Chef Hat (Scaled down & centered on upper half) -->
+  <g transform="translate(300, 105) scale(0.8)">
+    <!-- Main Hat Puffs -->
+    <path d="M -52,14 
+             C -76,12 -84,-20 -58,-34 
+             C -54,-66 -12,-76 0,-54 
+             C 12,-76 54,-66 58,-34 
+             C 84,-20 76,12 52,14 Z" fill="url(#hatYellow)" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Glossy Highlight Overlay on Hat -->
+    <ellipse cx="-8" cy="-26" rx="34" ry="24" fill="url(#hatHighlight)" />
+
+    <!-- Curved White Band -->
+    <path d="M -46,16 Q 0,8 46,16 L 44,31 Q 0,23 -44,31 Z" fill="#FFFFFF" stroke="#DCE6EE" stroke-width="1.5" />
+    
+    <!-- Bright Blue Curved Trim at Base -->
+    <path d="M -44,31 Q 0,23 44,31 L 43,39 Q 0,31 -43,39 Z" fill="url(#blueGrad)" />
+  </g>
+
+  <!-- Interlocking Bright 'CM' Monogram (Positioned right below hat) -->
+  <g transform="translate(300, 205) scale(0.75)">
+    <!-- Bold Orange 'C' with Sweeping Swooshed Tail -->
+    <path d="M -28,-38 
+             A 48,48 0 1,0 -15,43 
+             C 2,36 14,22 22,6 
+             C 8,16 -6,23 -20,24 
+             A 26,26 0 1,1 -28,-16 
+             C -20,-16 -14,-21 -14,-27 
+             C -14,-33 -20,-38 -28,-38 Z" fill="url(#orangeGrad)" />
+
+    <!-- Bold Rounded Blue 'M' -->
+    <path d="M 10,44 
+             L 10,-32 
+             C 10,-42 22,-46 29,-38 
+             L 56,-6 
+             L 83,-38 
+             C 90,-46 102,-42 102,-32 
+             L 102,44 
+             C 102,51 96,56 89,56 
+             C 82,56 76,51 76,44 
+             L 76,-4 
+             L 63,11 
+             C 59,16 53,16 49,11 
+             L 36,-4 
+             L 36,44 
+             C 36,51 30,56 23,56 
+             C 16,56 10,51 10,44 Z" transform="translate(-14, -10)" fill="url(#blueGrad)" />
+  </g>
+
+  <!-- Typography: COOKING MASTER (Single line format to fit the rectangle nicely) -->
+  <text x="300" y="315" font-family="&#39;Montserrat&#39;, &#39;Segoe UI&#39;, Roboto, Helvetica, Arial, sans-serif" font-size="32" font-weight="900" letter-spacing="3" fill="#0D2B45" text-anchor="middle">
+    COOKING MASTER
+  </text>
+
+  <!-- Bottom Divider with Star & Flame Emblem -->
+  <g transform="translate(300, 340)">
+    <!-- Left Tapered Line -->
+    <polygon points="-85,0 -28,-1.5 -28,1.5" fill="#0D2B45" />
+    
+    <!-- Small Five-Point Star -->
+    <polygon points="-17,-4 -15.5,-1 -11.5,-1 -14.5,1 -13.5,4 -17,2 -20.5,4 -19.5,1 -22.5,-1 -18.5,-1" fill="#0D2B45" />
+    
+    <!-- Center Flame Icon -->
+    <path d="M 0,-9 
+             C 3,-5 7,-2 7,3 
+             C 7,7 4,10 0,10 
+             C -4,10 -7,7 -7,3 
+             C -7,1 -5,-1 -4,-3 
+             C -4,-1 -3,1 -2,1 
+             C -3,-2 -2,-6 0,-9 Z" fill="#0D2B45" />
+    <!-- Inner Flame Cutout -->
+    <path d="M 0,2 C 1.5,3.5 2.5,5 2.5,6.5 C 2.5,8 1.5,9 0,9 C -1.5,9 -2.5,8 -2.5,6.5 C -2.5,5 -1.5,3.5 0,2 Z" fill="#FFFFFF" />
+
+    <!-- Right Tapered Line -->
+    <polygon points="85,0 28,-1.5 28,1.5" fill="#0D2B45" />
+  </g>
+</svg>
