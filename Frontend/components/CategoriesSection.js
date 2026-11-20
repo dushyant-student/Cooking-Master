@@ -38,7 +38,7 @@ export default function CategoriesSection() {
 
   return (
     <div className=" z-0 w-full overflow-x-auto overflow-y-hidden scrollbar-hide " >
-      <div className="   flex   gap-5 sm:gap-8   px-4 sm:px-6   py-6 sm:py-8   w-max   min-w-full ">
+      <div className="   flex gap-7 p-4 sm:px-6   py-6 sm:py-8   w-max   min-w-full ">
         {allCategories?.map((data) => (
           <ImageSection
             key={data._id || data.categoryType}

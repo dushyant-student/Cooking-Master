@@ -1,41 +1,50 @@
+
 "use client";
+
 import React from "react";
 import Slider from "react-slick";
 
-
-
 export default function BannerSlider() {
- 
-const settings = { dots: true, infinite: true, autoplay: true, autoplaySpeed: 2000, speed: 800, cssEase: "linear",};
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 800,
+    cssEase: "linear",
+    arrows: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: false,
+  };
+
+  const images = [
+    "/bannerImage/image2.png",
+    "/bannerImage/image4.png",
+    "/bannerImage/image1.png",
+    "/bannerImage/image3.jpg",
+    "/bannerImage/image6.png",
+    "/bannerImage/image3.jpg",
+  ];
 
   return (
-    <Slider z-0 {...settings} className="mt-17 overflow-hidden shrink-0 "  >
+    <div className="w-full mt-32 overflow-hidden shrink-0">
+      <Slider {...settings} className="banner-slider">
 
-      <div className="w-full h-100">
-        <img className="object-cover h-full overflow-hidden" src={"/bannerImage/image2.png"} />
-      </div>
+        {images.map((image, index) => (
+          <div key={index}>
+            <div className=" w-full h-76 sm:h-63 md:h-88 lg:h-105 xl:h-120 overflow-hidden">
+              <img
+                src={image}
+                alt={`Banner ${index + 1}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          </div>
+        ))}
 
-      <div className="w-full h-100" >
-        <img className="object-cover h-full overflow-hidden" src={"/bannerImage/image4.png"} />
-      </div>
-
-      <div className="w-full h-100" >
-        <img className="object-cover h-full overflow-hidden" src={"/bannerImage/image1.png"} />
-      </div>    
-
-      <div className="w-full h-100" >
-        <img className="object-cover h-full overflow-hidden" src={"/bannerImage/image3.jpg"} />
-      </div>
-
-      <div className="w-full h-100" >
-        <img className="object-cover h-full overflow-hidden" src={"/bannerImage/image6.png"} />
-      </div>
-
-      <div className="w-full h-100" >
-        <img className="object-cover h-full overflow-hidden" src={"/bannerImage/image3.jpg"} />
-      </div>
-
-      
-    </Slider>
+      </Slider>
+    </div>
   );
 }

@@ -25,7 +25,7 @@ export default function CategoriesType() {
 
    
     return (
-        <div className="fixed w-full top-15 lg:top-18 z-500 bg-white border overflow-x-auto border-b-2 pl-4">
+        <div className="fixed w-full top-16 lg:top-18 z-500 bg-white border overflow-x-auto border-b-2 pl-4">
          
             <ul className="flex gap-2 lg:gap-6 ">
                 <Link

@@ -22,7 +22,7 @@ export default function SectionGrid({filterRecipe}) {
 
 
   return (
-    <div className=' mt-30 flex py-2 bg-stone-100 flex-wrap justify-center items-center gap-4 px-7 lg:py-10 '>
+    <div className=' flex py-5 bg-stone-100 flex-wrap justify-center items-center gap-4 px-7 lg:py-10 '>
     
       {
         data ?
