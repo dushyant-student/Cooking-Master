@@ -22,31 +22,36 @@ const refreshUser = useCallback(async () => {
   try {
     setWait(true);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/me`,
-      {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-      }
-    );
+    const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
+    console.log("Backend URL:", API_URL);
+
+    if (!API_URL) {
+      throw new Error("Backend API URL is missing");
+    }
+
+    const response = await fetch(`${API_URL}/auth/me`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
 
     const data = await response.json();
 
-    console.log("AUTH STATUS:", response.status);
-    console.log("AUTH RESPONSE:", data);
-
-    if (response.ok && data.success && data.user) {
-      setUser(data.user);
-    } else {
-      setUser(null);
-    }
+    setUser(data.user || null);
 
   } catch (error) {
-    console.error("Auth check failed:", error);
+    console.error("Refresh User Error:", error);
     setUser(null);
   } finally {
-    setLoading(false);
     setWait(false);
   }
 }, []);

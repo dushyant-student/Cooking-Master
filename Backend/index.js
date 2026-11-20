@@ -25,12 +25,15 @@ connectCloudinary();
 
 app.use(express.json());
 
-app.use(
-    cors({
-        origin: "https://cooking-master-rho.vercel.app",
-        credentials: true,
-    })
-);
+app.use(cors({
+  origin: [
+    "https://localhost:5000",
+    "https://cooking-master-rho.vercel.app/",
+    "https://cooking-master.vercel.app"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+}));
 
 app.use(cookieParser());
 
