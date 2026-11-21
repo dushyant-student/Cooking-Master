@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
     refreshUser();
   }, [refreshUser]);
 
-console.log(user," USer Out of Context/.....")
+
 
 
   // PRIVATE API KEY
