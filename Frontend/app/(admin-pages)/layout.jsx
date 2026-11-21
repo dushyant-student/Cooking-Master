@@ -10,6 +10,8 @@ export default async function Layout({ children }) {
     redirect("/login");
   } 
   
+  
+
   return (
     <>
       <div className="flex h-screen w-full overflow-hidden">
