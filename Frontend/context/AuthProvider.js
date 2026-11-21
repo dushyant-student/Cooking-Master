@@ -2,7 +2,7 @@
 "use client";
 
 import { fetcher } from "@/lib/fetcher";
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useState, useCallback,} from "react";
 import useSWR from "swr";
 
 const AuthContext = createContext(null);
@@ -11,104 +11,112 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [wait, setWait] = useState(false);
+
   const [type, setType] = useState("latest");
   const [recipeId, setRecipeId] = useState("");
 
-  
- 
+
+
   // CHECK AUTH USER
 
-const refreshUser = useCallback(async () => {
-  try {
-    setWait(true);
+  const refreshUser = useCallback(async () => {
+    try {
+      setWait(true);
 
-    const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/me`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
-    console.log("Backend URL:", API_URL);
+      if (!response.ok) {
+        setUser(null);
+        return null;
+      }
 
-    if (!API_URL) {
-      throw new Error("Backend API URL is missing");
+      const data = await response.json();
+
+      setUser(data.user || null);
+
+      return data.user || null;
+
+    } catch (error) {
+
+      console.error("Refresh User Error:", error);
+
+      setUser(null);
+
+      return null;
+
+    } finally {
+      setWait(false);
+      setLoading(false);
     }
-
-    const response = await fetch(`${API_URL}/auth/me`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    console.log("Response status:", response.status);
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    setUser(data.user || null);
-
-  } catch (error) {
-    console.error("Refresh User Error:", error);
-    setUser(null);
-  } finally {
-    setWait(false);
-  }
-}, []);
-
+  }, []);
 
   useEffect(() => {
     refreshUser();
   }, [refreshUser]);
 
-  
- 
-  // SAVE RECIPES - PRIVATE 
+
+
+
+  // PRIVATE API KEY
+  const privateKey = !loading && user;
+
+  // SAVE RECIPES - PRIVATE
   const { data: saveData, error: saveError, isLoading: saveisLoading, mutate: saveRefresh,} = useSWR(
-    !loading && user ? "/save/recipes" : null,
+    privateKey ? "/save/recipes" : null,
     fetcher,
     {
       shouldRetryOnError: false,
     }
   );
-
 
   // ALL CATEGORIES - PUBLIC
-  const { data: allTypesCategories, error: categoryError, isLoading: categoryisLoading, mutate: categoryRefresh, } = useSWR("/category/all", fetcher, {
+
+  const { data: allTypesCategories, error: categoryError, isLoading: categoryisLoading, mutate: categoryRefresh,} = useSWR("/category/all", fetcher, {
     shouldRetryOnError: false,
   });
-
   
+
   // LIKE RECIPES - PRIVATE
+
   const { data: likeData, error: likeError, isLoading: likeisLoading, mutate: likeMutate,} = useSWR(
-    !loading && user ? "/like/my-like-recipes" : null,
+    privateKey ? "/like/my-like-recipes" : null,
     fetcher,
     {
       shouldRetryOnError: false,
     }
   );
+
 
   // USER POSTS - PRIVATE
+
   const { data: totalPost, error: totalPostError, isLoading: totalPostisLoading, mutate: totalPostMutate,} = useSWR(
-    !loading && user ? `/recipe/admins/all/${type}` : null,
+    privateKey ? `/recipe/admins/all/${type}` : null,
     fetcher,
     {
       shouldRetryOnError: false,
     }
   );
-
 
   // USER PROFILE - PRIVATE
+
   const { data: userProfile, error: profileError, isLoading: userProfileisLoading, mutate: userProfileMutate,} = useSWR(
-    !loading && user ? "/auth/profile" : null,
+    privateKey ? "/auth/profile" : null,
     fetcher,
     {
       shouldRetryOnError: false,
     }
   );
 
+  
 
   // ABOUT RECIPE - PUBLIC
+
   const { data: aboutData, error: aboutError, isLoading: aboutisLoading, mutate: aboutMutate,} = useSWR(
     recipeId ? `/recipe/${recipeId}` : null,
     fetcher,
@@ -117,7 +125,9 @@ const refreshUser = useCallback(async () => {
     }
   );
 
-  
+
+
+  // CONTEXT PROVIDER
 
   return (
     <AuthContext.Provider
@@ -174,6 +184,9 @@ const refreshUser = useCallback(async () => {
     </AuthContext.Provider>
   );
 }
+
+
+// CUSTOM AUTH HOOK
 
 export function useAuth() {
   const context = useContext(AuthContext);

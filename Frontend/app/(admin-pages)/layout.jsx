@@ -5,11 +5,11 @@ import AdminNavBar from "@/components/Admin-NavBar";
 
 export default async function Layout({ children }) {
   const user = await requireAuth();
-  console.log(user,"user.....")
+ 
   if ( !user ){
     redirect("/login");
   } 
-  console.log("Layout User:", user);
+  
   return (
     <>
       <div className="flex h-screen w-full overflow-hidden">

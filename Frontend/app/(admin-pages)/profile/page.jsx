@@ -22,7 +22,7 @@ export default function Page() {
     const inputref = useRef()
 
     const { userProfile, profileError, userProfileMutate } = useAuth();
-
+   
     const ProfileData = userProfile?.profile || emptyProfile;
     useEffect(() => {
     if (profileError) {
@@ -98,7 +98,7 @@ export default function Page() {
                     <img
                         
                         src={image || ProfileData?.imageURL?.replace("=s96-c", "=s400-c")  || "https://res.cloudinary.com/rpksfcbq/image/upload/v1788420836/iur59teuipxvqrhtedwq.png"}
-                        className=" w-30 h-30 rounded-full object-cover border"
+                        className=" w-30 h-30 rounded-full object-fill border"
                         onError={(e) => {
                             
                             e.currentTarget.src = "/defaultUserImage/defaultImage.png";
