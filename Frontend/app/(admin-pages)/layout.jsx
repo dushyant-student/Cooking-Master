@@ -6,9 +6,9 @@ import AdminNavBar from "@/components/Admin-NavBar";
 export default async function Layout({ children }) {
   const user = await requireAuth();
   console.log(user,"user in Layout.../.......///")
-  if ( !user ){
-    redirect("/login");
-  } 
+  // if ( !user ){
+  //   redirect("/login");
+  // } 
   
 
 
