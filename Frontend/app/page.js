@@ -5,18 +5,22 @@ import CustomerReviews from "@/components/CustomerReviews";
 import Footer from "@/components/Footer";
 import HomeNavBar from "@/components/HomeNavbar";
 import SectionGrid from "@/components/SectionGrid";
+import { requireAuth } from "@/lib/auth/serverAuth";
 
 
 
 
 export default async function Home () {
   
-   
+  const user = await requireAuth();
+  
+    console.log("User in Server HomePage:", user);
+  
 
   return (
     <div className="h-screen " >
 
-      <HomeNavBar/>
+      <HomeNavBar user={user} />
 
       {/* //category types */}
       <CategoriesType />

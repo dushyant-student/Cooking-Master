@@ -31,7 +31,7 @@ export async function requireAuth() {
     if (!data.success) {
       return null;
     }
-    console.log(user,"ServerAuth..//.././/....")
+    console.log(data,"ServerAuth..//.././/....")
     return data.user;
 
   } catch (error) {

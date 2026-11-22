@@ -6,7 +6,9 @@ export default async function Dashboard() {
 
 
     const details = await getDashBoardsDetails();
-    
+
+  
+
     const status = [
         {
             title: "My Recipes",

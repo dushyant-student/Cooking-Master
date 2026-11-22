@@ -65,8 +65,8 @@ const menuList = [
 
 
 
-export default function HomeNavBar() {
-  const {wait, user,refreshUser , setUser, saveData } = useAuth();
+export default function HomeNavBar( {user} ) {
+  const { wait,refreshUser , setUser, saveData } = useAuth();
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const pathname = usePathname();

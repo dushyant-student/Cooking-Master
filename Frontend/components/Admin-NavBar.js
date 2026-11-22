@@ -1,26 +1,51 @@
 
 "use client";
 
-import { useAuth } from "@/context/AuthProvider";
-import { logOutUser } from "@/services/authServices";
-import { Heart, LayoutDashboard, LogOutIcon, Menu, Search,  User, X, ArrowUpFromLine, ClipboardList, PackageOpen, Bookmark, HomeIcon, Play,} from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+
+import {
+  LayoutDashboard,
+  User,
+  ArrowUpFromLine,
+  ClipboardList,
+  PackageOpen,
+  Heart,
+  Bookmark,
+  HomeIcon,
+  Play,
+  LogOutIcon,
+  Menu,
+  X,
+  Search,
+} from "lucide-react";
+
+import { logOutUser } from "@/services/authServices";
+
+import {
+  usePathname,
+  useRouter,
+} from "next/navigation";
+
 import { useEffect, useState } from "react";
+
 import { toast } from "react-toastify";
 
-export default function AdminNavBar() {
+
+export default function AdminNavBar({ user }) {
+
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
-  const { user ,setUser , refreshUser } = useAuth();
+
   const pathname = usePathname();
   const router = useRouter();
+
 
   const menu = [
     { name: "Home", link: "/" },
     { name: "About", link: "/about" },
     { name: "Contact", link: "/contact" },
   ];
+
 
   const menuList = [
     {
@@ -68,32 +93,35 @@ export default function AdminNavBar() {
       link: "/total-videos",
       icon: <Play />,
     },
-    
   ];
 
 
-  useEffect(()=>{
+  useEffect(() => {
     setToggle(false);
-  },[pathname])
+  }, [pathname]);
 
 
+  // SEARCH FUNCTION
   const searchText = (e) => {
+
     e.preventDefault();
 
     const query = search.trim();
+
     if (!query) return;
 
     router.push(`/search?q=${encodeURIComponent(query)}`);
+
     setSearch("");
   };
 
-  
 
   return (
     <>
+
       <nav className="sticky top-0 z-50 shrink-0 flex h-16 w-full items-center justify-between gap-4 border-b border-gray-200 bg-white px-4 md:px-8">
 
-        {/* MOBILE MENU */}
+        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setToggle(true)}
           className="shrink-0 md:hidden"
@@ -102,10 +130,14 @@ export default function AdminNavBar() {
           <Menu />
         </button>
 
+
         {/* DESKTOP LINKS */}
         <ul className="hidden items-center gap-6 md:flex">
+
           {menu.map((item) => (
+
             <li key={item.link}>
+
               <Link
                 href={item.link}
                 className={`font-semibold ${
@@ -116,24 +148,25 @@ export default function AdminNavBar() {
               >
                 {item.name}
               </Link>
+
             </li>
+
           ))}
+
         </ul>
+
 
         {/* SEARCH */}
         <form
           onSubmit={searchText}
           className="ml-auto min-w-0 flex flex-1"
         >
+
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search recipe"
-            className="w-full min-w-0 rounded-l-md px-4 py-2 outline-none
-            border border-gray-300 bg-white 
-            transition-all duration-300
-            focus-within:border-green-500
-            "
+            className="w-full min-w-0 rounded-l-md px-4 py-2 outline-none border border-gray-300 bg-white transition-all duration-300 focus-within:border-green-500"
           />
 
           <button
@@ -142,30 +175,47 @@ export default function AdminNavBar() {
           >
             <Search size={19} />
           </button>
+
         </form>
 
-        {/* ACCOUNT */}
-        {
-          pathname === "/profile" ? "" :
-        <Link
-          href="/profile"
-          aria-label="Account"
-          className="shrink-0 rounded-full border border-gray-300 "
-        >
-          {
-            user?.imageURL ? 
-            <img src={user?.imageURL } className="w-8 h-8 rounded-full object-cover" />
-            :
-            <User size={30}  />
 
-          }
-        </Link>
+        {/* ACCOUNT PROFILE */}
+        {pathname !== "/profile" && (
 
-        }
+          <Link
+            href="/profile"
+            aria-label="Account"
+            className="shrink-0 rounded-full border border-gray-300"
+          >
+
+            {user?.imageURL ? (
+
+              <img
+                src={user.imageURL}
+                alt="Profile"
+                className="w-8 h-8 rounded-full object-cover"
+              />
+
+            ) : (
+
+              <User size={30} />
+
+            )}
+
+          </Link>
+
+        )}
+
       </nav>
 
+
       {/* MOBILE SIDEBAR */}
-      <AdminAside menuList={menuList} toggle={toggle} setToggle={setToggle} pathname={pathname} refreshUser ={refreshUser } setUser={setUser} />
+      <AdminAside
+        menuList={menuList}
+        toggle={toggle}
+        setToggle={setToggle}
+        pathname={pathname}
+      />
 
     </>
   );
@@ -173,78 +223,110 @@ export default function AdminNavBar() {
 
 
 
+// MOBILE SIDEBAR COMPONENT
 
-
-function AdminAside({ menuList, toggle, setToggle, pathname, refreshUser ,setUser }) {
+function AdminAside({
+  menuList,
+  toggle,
+  setToggle,
+  pathname,
+}) {
 
   const router = useRouter();
 
+
+  // LOGOUT FUNCTION
   const handleLogout = async () => {
+
     try {
-      const Confirm = window.confirm("Do You Want to Logout?");
+
+      const Confirm = window.confirm(
+        "Do You Want to Logout?"
+      );
+
       if (!Confirm) return;
+
 
       const response = await logOutUser();
 
+
       if (response.success) {
-
-        setUser(null);
-
-        await refreshUser();
 
         setToggle(false);
 
+        toast.success("Logout Successfully");
+
         router.replace("/");
+
         router.refresh();
 
-        toast.success("Logout Successfully");
       }
 
     } catch (err) {
-      console.log("Logout Failed", err);
+
+      console.log("Logout Failed:", err);
+
       toast.error("Logout Failed");
+
     }
+
   };
 
 
   return (
+
     <>
-     
+
+      {/* OVERLAY */}
       <div
         onClick={() => setToggle(false)}
-        className={`fixed inset-0 z-60 bg-black/40 transition-opacity md:hidden ${
+        className={`fixed inset-0 z-[60] bg-black/40 transition-opacity md:hidden ${
           toggle
             ? "opacity-100"
             : "pointer-events-none opacity-0"
         }`}
       />
 
-      {/* SIDEBAR */}
+
+      {/* MOBILE SIDEBAR */}
       <aside
-        className={`fixed inset-y-0 left-0 z-70 flex w-60 flex-col border-r border-gray-200 bg-white transition-transform duration-300 md:hidden ${
-          toggle ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-y-0 left-0 z-[70] flex w-60 flex-col border-r border-gray-200 bg-white transition-transform duration-300 md:hidden ${
+          toggle
+            ? "translate-x-0"
+            : "-translate-x-full"
         }`}
       >
-        
+
+        {/* LOGO */}
         <div className="flex h-16 shrink-0 items-center justify-between border-b px-4">
+
           <img
             src="/logo.svg"
             alt="Logo"
             className="h-12 w-32 object-contain"
           />
 
-          <button onClick={() => setToggle(false)} aria-label="Close sidebar">
+          <button
+            onClick={() => setToggle(false)}
+            aria-label="Close sidebar"
+          >
             <X />
           </button>
+
         </div>
 
-        
+
+        {/* MENU */}
         <ul className="flex-1 space-y-2 overflow-y-auto p-4">
+
           {menuList.map((item) => {
+
             const selected = pathname === item.link;
 
             return (
+
               <li key={item.link}>
+
                 <Link
                   href={item.link}
                   onClick={() => setToggle(false)}
@@ -254,27 +336,43 @@ function AdminAside({ menuList, toggle, setToggle, pathname, refreshUser ,setUse
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
+
                   {item.icon}
+
                   {item.name}
+
                 </Link>
+
               </li>
+
             );
+
           })}
+
         </ul>
 
 
         {/* LOGOUT */}
         <div className="border-t p-4">
+
           <button
             onClick={handleLogout}
             type="button"
             className="flex w-full items-center gap-3 rounded-md px-4 py-3 font-semibold text-red-600 hover:bg-red-50"
           >
+
             <LogOutIcon size={20} />
+
             LOGOUT
+
           </button>
+
         </div>
+
       </aside>
+
     </>
+
   );
+
 }

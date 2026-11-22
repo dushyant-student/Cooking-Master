@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
 
       const data = await response.json();
 
-      console.log(data?.user,"data USer in Context/.....")
+      
       setUser(data.user || null);
       return data.user || null;
 
@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
     refreshUser();
   }, [refreshUser]);
 
-
+console.log(user,"USer in AuthContext/.....")
 
 
   // PRIVATE API KEY
