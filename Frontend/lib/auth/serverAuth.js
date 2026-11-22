@@ -1,17 +1,14 @@
-
 import { cookies } from "next/headers";
 
 export async function requireAuth() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-
-  if (!token) {
-    return null;
-  }
-
   try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    if (!token) return null;
+
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/me`,
+      `${process.env.BACKEND_API_URL}/api/auth/me`,
       {
         method: "GET",
         headers: {
@@ -21,21 +18,14 @@ export async function requireAuth() {
       }
     );
 
-    if (!response.ok) {
-      console.log("Auth failed:", response.status);
-      return null;
-    }
+    if (!response.ok) return null;
 
     const data = await response.json();
 
-    if (!data.success) {
-      return null;
-    }
-    console.log(data,"ServerAuth..//.././/....")
-    return data.user;
+    return data.user || null;
 
   } catch (error) {
-    console.error("requireAuth error:", error);
+    console.error("RequireAuth Error:", error);
     return null;
   }
 }

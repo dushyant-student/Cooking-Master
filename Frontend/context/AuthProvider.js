@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
       setWait(true);
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/me`,
+        `/auth/me`,
         {
           method: "GET",
           credentials: "include",
