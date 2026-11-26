@@ -43,7 +43,7 @@ export function AuthProvider({ children }) {
 
       
       setUser(data.user || null);
-      console.log("setUser....",data.user)
+      // console.log("setUser....",data.user)
       return data.user || null;
 
     } catch (error) {
@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
     refreshUser();
   }, [refreshUser]);
 
-console.log(user,"USer in AuthContext/.....")
+// console.log(user,"USer in AuthContext/.....")
 
 
   // PRIVATE API KEY
