@@ -8,8 +8,16 @@ export async function requireAuth() {
       throw new Error("BACKEND_API_URL is missing");
     }
 
-    const cookieStore = await cookies();
+   const cookieStore = await cookies();
+
+    console.log(
+      "All Server Cookies:",
+      cookieStore.getAll().map(cookie => cookie.name)
+    );
+
     const token = cookieStore.get("token")?.value;
+
+    console.log("Token Available:", Boolean(token));
 
     console.log("Server Auth - Token Available:", !!token);
 
