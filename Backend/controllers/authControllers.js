@@ -14,9 +14,9 @@ const generateToken = (res, payload) => {
     );
 
     res.cookie("token", token, {
-    httpOnly: false,
+    httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: "lax",
     maxAge: 3 * 24 * 60 * 60 * 1000,
     path: "/",
     });
