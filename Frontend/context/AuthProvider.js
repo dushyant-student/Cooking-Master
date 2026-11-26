@@ -21,9 +21,9 @@ export function AuthProvider({ children }) {
 
   const refreshUser = useCallback(async () => {
     try {
-      if ( !Api_Backend_Url ){
-        return ;
-      }
+      if (!Api_Backend_Url) {
+      throw new Error("refreshUser Backend API URL is missing");
+    }
       
       setWait(true);
       const response = await fetch(

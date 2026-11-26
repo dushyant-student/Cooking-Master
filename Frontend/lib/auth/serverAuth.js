@@ -5,7 +5,7 @@ export async function requireAuth() {
 
   try {
     if (!Api_Backend_Url) {
-      throw new Error("Backend API URL is missing");
+      throw new Error("RequireAuth Backend API URL is missing");
     }
 
     const cookieStore = await cookies();
