@@ -1,14 +1,19 @@
 import { cookies } from "next/headers";
 
 export async function requireAuth() {
+  const Api_Backend_Url= process.env.NEXT_PUBLIC_BACKEND_API_URL ;
   try {
+    if ( !Api_Backend_Url ){
+      return ;
+    }
+
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
     if (!token) return null;
 
     const response = await fetch(
-      `${process.env.BACKEND_API_URL}/api/auth/me`,
+      `${Api_Backend_Url}/auth/me`,
       {
         method: "GET",
         headers: {

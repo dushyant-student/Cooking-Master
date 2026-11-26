@@ -15,7 +15,11 @@ export default async function ({ params }) {
       return <RecipeNotAvailable />
     }
     
-    return <SectionGrid filterRecipe={data} />
+    return (    
+    <div className='pt-35' >
+      <SectionGrid filterRecipe={data} />
+    </div>
+    )
 
   } catch (err) {
     // console.log(err)

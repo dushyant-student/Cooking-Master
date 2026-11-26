@@ -65,16 +65,16 @@ const menuList = [
 
 
 
-export default function HomeNavBar( {user} ) {
+export default function HomeNavBar( { user } ) {
   const { wait,refreshUser , setUser, saveData } = useAuth();
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   
-  // if (wait){
-  //   return ;
-  // }
+  if (wait){
+    return ;
+  }
 
   // Favourite count
   const saveCount = Array.isArray(saveData?.data)

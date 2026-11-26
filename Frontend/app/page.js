@@ -14,7 +14,7 @@ export default async function Home () {
   
   const user = await requireAuth();
   
-    console.log("User in Server HomePage:", user);
+    console.log("User form requiredAuth in Server HomePage:", user);
   
 
   return (
