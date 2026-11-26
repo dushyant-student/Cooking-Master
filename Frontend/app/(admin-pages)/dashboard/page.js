@@ -6,7 +6,7 @@ export default async function Dashboard() {
 
 
     const details = await getDashBoardsDetails();
-
+    console.log("dashbOrad... :-",details)
   
 
     const status = [

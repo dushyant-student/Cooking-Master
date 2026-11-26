@@ -16,15 +16,18 @@ export function AuthProvider({ children }) {
   const [recipeId, setRecipeId] = useState("");
 
 
-
+  const Api_Backend_Url= process.env.NEXT_PUBLIC_BACKEND_API_URL ;
   // CHECK AUTH USER
 
   const refreshUser = useCallback(async () => {
     try {
+      if ( !Api_Backend_Url ){
+        return ;
+      }
+      
       setWait(true);
-
       const response = await fetch(
-        `/auth/me`,
+        `${Api_Backend_Url}/auth/me`,
         {
           method: "GET",
           credentials: "include",

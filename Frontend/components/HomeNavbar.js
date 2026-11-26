@@ -72,9 +72,9 @@ export default function HomeNavBar( {user} ) {
   const pathname = usePathname();
   const router = useRouter();
   
-  if (wait){
-    return ;
-  }
+  // if (wait){
+  //   return ;
+  // }
 
   // Favourite count
   const saveCount = Array.isArray(saveData?.data)
@@ -107,7 +107,7 @@ export default function HomeNavBar( {user} ) {
   const AccountButton = () => {
     return (
       <>
-        {user ?
+        { ( user || wait ) ?
         <Link
           href="/profile"
           title="profile"

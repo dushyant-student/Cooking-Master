@@ -6,11 +6,11 @@ export const uploadsData = async (formData) => {
 };
 
 
-
 export const updateRecipe = async (id, formData) => {
     const response = await api.put(`/recipe/update/${id}`, formData);
     return response.data;
 };
+
 
 export const deleteRecipeById = async (id) => {
     const response = await api.delete(`/recipe/delete/${id}`);
