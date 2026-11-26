@@ -43,6 +43,7 @@ export function AuthProvider({ children }) {
 
       
       setUser(data.user || null);
+      console.log("setUser....",data.user)
       return data.user || null;
 
     } catch (error) {

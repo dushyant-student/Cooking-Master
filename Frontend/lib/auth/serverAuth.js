@@ -1,10 +1,12 @@
+
 import { cookies } from "next/headers";
 
 export async function requireAuth() {
-  const Api_Backend_Url= process.env.NEXT_PUBLIC_BACKEND_API_URL ;
+  const Api_Backend_Url = process.env.BACKEND_API_URL;
+
   try {
-    if ( !Api_Backend_Url ){
-      return ;
+    if (!Api_Backend_Url) {
+      throw new Error("Backend API URL is missing");
     }
 
     const cookieStore = await cookies();
