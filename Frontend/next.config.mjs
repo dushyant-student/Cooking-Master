@@ -5,10 +5,19 @@ const nextConfig = {
     root: process.cwd(),
   },
 
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://qbook-b267.onrender.com/api/:path*",
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
-        source: "/:path*",
+        source: "/api/:path*",
         headers: [
           {
             key: "Cross-Origin-Opener-Policy",
