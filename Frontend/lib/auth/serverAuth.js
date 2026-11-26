@@ -21,9 +21,9 @@ export async function requireAuth() {
 
     console.log("Server Auth - Token Available:", !!token);
 
-    if (!token) {
-      return null;
-    }
+    // if (!token) {
+    //   return null;
+    // }
 
     const response = await fetch(
       `${API_URL.replace(/\/$/, "")}/auth/me`,
