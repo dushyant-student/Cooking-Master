@@ -11,11 +11,9 @@ export async function requireAuth() {
     const cookieStore = await cookies()
     const cookieHeader = cookieStore.toString()
 
-    if (!cookieHeader) return null
+    if (!cookieHeader) return null ;
 
-    /*
-   const cookieStore = await cookies();
-   
+
    console.log(
     "All Server Cookies:",
     cookieStore.getAll().map(cookie => cookie.name)
@@ -26,7 +24,7 @@ export async function requireAuth() {
     console.log("Token Available:", {token});
     
     console.log("Server Auth - Token Available:", !!token);
-    */
+ 
 
     const response = await fetch(`${API_URL.replace(/\/$/, '')}/auth/me`, {
       headers: { Cookie: cookieHeader },
