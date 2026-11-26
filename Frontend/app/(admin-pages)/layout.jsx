@@ -1,7 +1,11 @@
+
 import SideBar from "@/components/SideBar";
 import AdminNavBar from "@/components/Admin-NavBar";
 import { requireAuth } from "@/lib/auth/serverAuth";
 import { redirect } from "next/navigation";
+
+// This layout uses cookies, so render dynamically.
+export const dynamic = "force-dynamic";
 
 export default async function Layout({ children }) {
 

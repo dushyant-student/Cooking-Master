@@ -1,12 +1,10 @@
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import { AuthProvider } from "@/context/AuthProvider";
 import SWRProvider from "@/components/providers/SWRProvider";
 import Notify from "@/components/ToastMessage";
-
-
-
 
 export const metadata = {
   title: "Create Next App",
@@ -15,16 +13,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      
-    >
-      <body className="flex flex-col ">
+    <html lang="en">
+      <body className="flex flex-col">
         <AuthProvider>
           <SWRProvider>
-
             {children}
-            <Notify/>
+            <Notify />
           </SWRProvider>
         </AuthProvider>
       </body>

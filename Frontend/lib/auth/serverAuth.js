@@ -1,53 +1,44 @@
-
 import { cookies } from "next/headers";
 
 export async function requireAuth() {
-  const Api_Backend_Url = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const API_URL = process.env.BACKEND_API_URL;
 
   try {
-    console.log("Backend URL:", Api_Backend_Url);
-
-    if (!Api_Backend_Url) {
-      throw new Error("Backend API URL is missing");
+    if (!API_URL) {
+      throw new Error("BACKEND_API_URL is missing");
     }
 
     const cookieStore = await cookies();
-
     const token = cookieStore.get("token")?.value;
 
-    console.log("Token Available:", Boolean(token));
+    console.log("Server Auth - Token Available:", !!token);
 
     if (!token) {
-      console.log("JWT Token Not Found in Next.js Cookies");
       return null;
     }
 
     const response = await fetch(
-      `${Api_Backend_Url}/auth/me`,
+      `${API_URL.replace(/\/$/, "")}/auth/me`,
       {
         method: "GET",
         headers: {
           Cookie: `token=${token}`,
+          Accept: "application/json",
         },
         cache: "no-store",
       }
     );
 
-    console.log("Auth API Status:", response.status);
-
-    const responseText = await response.text();
-
-    console.log("Auth API Response:", responseText);
+    console.log("Server Auth - Status:", response.status);
 
     if (!response.ok) {
+      console.log("Server Auth - Authentication Failed");
       return null;
     }
 
-    const data = JSON.parse(responseText);
+    const data = await response.json();
 
-    console.log("Complete Auth Data:", data);
-
-    console.log("User Object:", data.user);
+    console.log("Server Auth - User:", data.user);
 
     return data.user || null;
 
