@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 
 export async function requireAuth() {
-  const API_URL = process.env.BACKEND_API_URL;
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
   if (!API_URL) {
     console.error("BACKEND_API_URL is missing");
