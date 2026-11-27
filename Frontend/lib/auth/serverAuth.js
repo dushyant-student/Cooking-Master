@@ -1,10 +1,10 @@
 import { cookies } from "next/headers";
 
 export async function requireAuth() {
-  const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const API_URL = process.env.BACKEND_API_URL;
 
   if (!API_URL) {
-    console.error("BACKEND API URL is missing");
+    console.error("BACKEND_API_URL is missing");
     return null;
   }
 
@@ -17,10 +17,7 @@ export async function requireAuth() {
 
     if (!token) return null;
 
-    const url = `${API_URL.replace(/\/$/, "")}/auth/me`;
-    console.log("Calling:", url);
-
-    const response = await fetch(url, {
+    const response = await fetch(`${API_URL.replace(/\/$/, "")}/auth/me`, {
       method: "GET",
       headers: {
         Cookie: `token=${token}`,
@@ -32,14 +29,11 @@ export async function requireAuth() {
     console.log("Auth status:", response.status);
 
     if (!response.ok) {
-      const text = await response.text();
-      console.log("Auth error body:", text);
+      console.log("Auth error body:", await response.text());
       return null;
     }
 
     const data = await response.json();
-    console.log("Auth data:", data);
-
     return data.success ? data.user : null;
   } catch (error) {
     console.error("RequireAuth error:", error);
