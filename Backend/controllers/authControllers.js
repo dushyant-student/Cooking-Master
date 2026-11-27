@@ -20,7 +20,7 @@ const generateToken = (res, payload) => {
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-
+    console.log(token,"togen Generates;---- ")
     return token;
   } catch (error) {
     console.error("Token generation error:", error);
