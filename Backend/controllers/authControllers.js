@@ -17,8 +17,8 @@ const generateToken = (res, payload) => {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
-    maxAge: 3 * 24 * 60 * 60 * 1000,
     path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     return token;

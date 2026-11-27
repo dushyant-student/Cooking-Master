@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
@@ -9,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://qbook-b267.onrender.com/api/:path*",
+        destination: "https://cooking-master.onrender.com/api/:path*",
       },
     ];
   },
@@ -17,15 +16,11 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/api/:path*",
+        source: "/:path*",
         headers: [
           {
             key: "Cross-Origin-Opener-Policy",
             value: "same-origin-allow-popups",
-          },
-          {
-            key: "Cross-Origin-Embedder-Policy",
-            value: "unsafe-none",
           },
         ],
       },

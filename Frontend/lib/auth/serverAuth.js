@@ -1,47 +1,48 @@
-import { cookies } from 'next/headers'
-import api from '@/lib/axios'
+import { cookies } from "next/headers";
 
 export async function requireAuth() {
-  const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
   if (!API_URL) {
-    throw new Error('BACKEND_API_URL is missing')
+    console.error("BACKEND API URL is missing");
+    return null;
   }
 
   try {
-    const cookieStore = await cookies()
-    const cookieHeader = cookieStore.toString()
-
-    if (!cookieHeader) return null ;
-
-
-   console.log(
-    "All Server Cookies:",
-    cookieStore.getAll().map(cookie => cookie.name)
-    );
-    
+    const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
-    
-    console.log("Token Available:", {token});
-    
-    console.log("Server Auth - Token Available:", !!token);
- 
 
-    const response = await fetch(`${API_URL.replace(/\/$/, '')}/auth/me`, {
-      headers: { Cookie: cookieHeader },
-      cache: 'no-store',
-    })
-    console.log('Server Auth - Status:', response.status, response.ok)
+    console.log("Server cookies:", cookieStore.getAll().map((c) => c.name));
+    console.log("Token exists:", !!token);
+
+    if (!token) return null;
+
+    const url = `${API_URL.replace(/\/$/, "")}/auth/me`;
+    console.log("Calling:", url);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Cookie: `token=${token}`,
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
+
+    console.log("Auth status:", response.status);
 
     if (!response.ok) {
-      console.log('Server Auth - Authentication Failed')
+      const text = await response.text();
+      console.log("Auth error body:", text);
+      return null;
     }
 
-    const data = await response.json()
-    console.log('Server Auth - User:', data)
+    const data = await response.json();
+    console.log("Auth data:", data);
 
-    return data.user || null
+    return data.success ? data.user : null;
   } catch (error) {
-    console.error('RequireAuth Error:', error)
-    return null
+    console.error("RequireAuth error:", error);
+    return null;
   }
 }
