@@ -18,8 +18,9 @@ const generateToken = (res, payload) => {
     const token = jwt.sign(payload, process.env.SECRET_KEY, {
       expiresIn: "3d",
     });
-
+    
     res.cookie("token", token, COOKIE_OPTIONS);
+    console.log(token,"token Genrates----")
     return token;
   } catch (error) {
     console.error("Token generation error:", error);
